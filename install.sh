@@ -46,6 +46,8 @@ sleep 3
 sudo bitcoind -daemon -testnet -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
 
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo "== Setup Apache2...  =="
 echo "=== Check after install if settings are correct.. ==="
 echo "# change AllowOverride All for /var/www "
@@ -54,11 +56,15 @@ echo "# change DocumentRoot to /var/www/shop "
 echo "## sudo nano /etc/apache2/sites-enabled/000-default.conf "
 sleep 8
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo "Setting up 'AllowOverride All' for /var/www"
 sleep 2
 sudo sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
 sudo service apache2 restart
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo "== Setting up Apache2 DocumentRoot.. =="
 echo " check if still root.. "
 sudo su
@@ -75,7 +81,8 @@ sudo mysql -e "CREATE DATABASE annularis;"
 sudo mysql -e "CREATE USER annularis IDENTIFIED BY 'password';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON annularis.* TO annularis@localhost IDENTIFIED BY 'password';"
 
-
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo "== Setup Database and Bitcoin.conf after Install this script..  =="
 sleep 3
 echo "# setup's for Annularis config's.. "
@@ -90,11 +97,16 @@ echo "Bitcoinuser = "bitcoinuser" "
 echo "Bitcoin Password = "bitcoinpass" "
 echo "Bitcoin IP = "127.0.0.1" "
 sleep 8
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo " copy htaccess.sample to .htaccess setup show setup instruction's "
 echo "# comment out 'RewriteBase /shop' "
 echo "## sudo nano .htaccess "
 sleep 3
+cd /var/www/shop
 sudo cp htaccess.sample .htaccess
 
 echo " Change Permissions of "config Files" "
@@ -108,9 +120,11 @@ sudo apt-get install nginx
 
 echo " Prepare Annularis executor.. "
 # prepare annularis executor user
-groupadd annularis
-useradd -g annularis annularis
+sudo groupadd annularis
+sudo useradd -g annularis annularis
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo " php7.0-fpm settings.. "
 sudo cp /etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/annularis.conf
 sudo nano /etc/php/7.0/fpm/pool.d/annularis.conf
@@ -133,6 +147,8 @@ echo " Restart php7.0-fpm "
 # restart php-fpm
 sudo service php7.0-fpm restart
 
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo " Nginx setting's "
 # nginx settting
 cd /var/www/shop
@@ -143,7 +159,7 @@ service nginx restart
 
 
 
-
+echo " scroll up and check every settings where you see '##' "
 
 
 
