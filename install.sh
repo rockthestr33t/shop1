@@ -5,7 +5,7 @@ sleep 3
 
 echo "== Update the Mashine !!!!! ==" 
 sleep 5
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && apt-get autoremove -y 
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y 
 
 
 echo "== Setting up repo and in a few seconds you have to hit ENTER ==" 
