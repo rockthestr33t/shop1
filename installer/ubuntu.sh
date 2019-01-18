@@ -59,9 +59,9 @@ mysql -e "GRANT ALL PRIVILEGES ON annularis.* TO annularis@localhost IDENTIFIED 
 
 # Install annularis source (from git)
 echo "Cloning Annularis.."
-cd /var/www/html
+cd /var/www/
 git clone https://github.com/annularis/shop
-chown www-data:www-data -Rv /var/www/html/shop
+chown www-data:www-data -Rv /var/www/shop
 
 # Restart Apache
 systemctl restart apache2.service
