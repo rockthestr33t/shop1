@@ -125,7 +125,7 @@ sudo find /var/www/shop -type f -exec chmod 660 {} \;
 
 # add user and group with password install this tool 
 # this url for add user and group: https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart
-# this url for changing permission: 
+# this url for changing permission: https://askubuntu.com/questions/66718/how-to-manage-users-and-groups-using-gui
 
 
 
