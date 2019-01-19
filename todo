@@ -1,5 +1,5 @@
 1.
-onion Market's url's:
+Onion Market's url's for inspiration :
 https://saralaajivika.000webhostapp.com/
 https://gist.github.com/smarek/b538465a711edc7e6d7652c82e76d374
 https://github.com/nishu-aggarwal/MultiVendorWebsite
@@ -8,67 +8,83 @@ https://shuup.readthedocs.io/en/latest/index.html
 https://github.com/puuble/laravelMarket
 https://github.com/kirilkirkov/Ecommerce-CodeIgniter-Bootstrap
 
-2.
-disable apache2 on startup:
+# 2.
+# ADD to script disable apache2 on startup :
 sudo update-rc.d apache2 disable
 
-3.
-Update'S for rockthestreet
+# 3.
+# ADD to script nginx-extras :
 sudo apt install nginx-extras
 
-4.
-trying to set:
-nano /etc/nginx/sites-available/default & annularis-nginx.conf
+# 4.
+# ADD to script 'html & htm' indexe's :
+sudo nano /etc/nginx/sites-available/default & annularis-nginx.conf
 add   index.html index.htm index.nginx-debian.html
 
-5.
-search all php7.0 options :
-apt-cache search php7.0
+# 5.
+# Admin info search all 'php7.0 option's' to install from repository :
+sudo apt-cache search php7.0
 
-6.
-list all unix socket's :
-netstat --unix -l
+# 6.
+# Admin info list all unix socket's :
+sudo netstat --unix -l
 
-7.
-list all tcp socket's :
-netstat -t -l
+# 7.
+# Admin info list all tcp socket's :
+sudo netstat -t -l
 
-8.
-download ping and fpm status site :
+# 8.
+# ADD to script
+# changing permission nginx rockthestreet81 and chmod :
+# Change directory structure ownership for the new directory to www-data:www-data for the webserver. 
+# from oter tutorial
+# sudo chown -R www-data:www-data /var/www/shop
+# this i used
+sudo chown www-data:www-data -Rv /var/www/shop
+
+
+# 9.
+# Give www-data user/group read/write/execute privileges for all directories, and read/write privileges for all files, within the project directory. 
+sudo find /var/www/shop -type d -exec chmod 770 {} \;
+sudo find /var/www/shop -type f -exec chmod 660 {} \;
+# sudo chown user:user -R .
+# this i used
+sudo chown www-data:www-data -Rv /var/www/shop
+
+# 9.
+# Check if installed and we have to install next time?  download ping and fpm status site :
 sudo git clone https://github.com/wwwpro/wordpress-nginx/blob/master/php_fpm_status_vhost.conf
 sudo git clone https://github.com/wwwpro/wordpress-nginx/blob/master/php_fpm_status_allowed_hosts.conf
 
-to request this page, you have to set it up in fpm and configure nginx
-(or another front web server) to access it.
+# to request this page, you have to set it up in fpm and configure nginx (or another front web server) to access it.
 
-For exemple in php-fpm.conf:
-<value name="status">/status</value> // requesting /status will
-return the status page
-<value name="ping">/ping</value> // requesting /ping will return the
-text set next
-<value name="pong">pong</value> // requestint the previous parameter
-will return pong
+# For exemple in php-fpm.conf:
+# <value name="status">/status</value> // requesting /status will
+# return the status page
+# <value name="ping">/ping</value> // requesting /ping will return the
+# text set next
+# <value name="pong">pong</value> // requestint the previous parameter
+# will return pong
 
-And in nginx.conf:
-...
-http {
-server {
-listen 80;
-...
-location ~ ^/(status|ping)$ {
-include fastcgi_params;
-fastcgi_pass backend;
-fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
-allow 127.0.0.1;
-allow stats_collector.localdomain;
-allow watchdog.localdomain;
-deny all;
-}
-}
-}
+# And in nginx.conf:
+# ...
+ http {
+ server {
+ listen 80;
+# ...
+ location ~ ^/(status|ping)$ {
+ include fastcgi_params;
+ fastcgi_pass backend;
+ fastcgi_param SCRIPT_FILENAME $fastcgi_script_name;
+ allow 127.0.0.1;
+ allow stats_collector.localdomain;
+ allow watchdog.localdomain;
+ deny all;
+ }
+ }
+ }
 
-The request the web server:
-
+# The request the web server:
 # curl http://localhost:81/status.php
 accepted conn: 2
 pool: pool_1
@@ -91,18 +107,9 @@ total processes: 3
 processes":3,"active processes":0,"total processes":3}
 
 # curl http://localhost:81/ping.php
-pong
+# pong
 
-9.
-changing permission nginx rockthestreet81 and chmod :
-# Change directory structure ownership for the new directory to www-data:www-data for the webserver. 
-sudo chown -R www-data:www-data /var/www/PROJECTDIR
 
-# Give www-data user/group read/write/execute privileges for all directories, and read/write privileges for all files, within the project directory. 
-sudo find /var/www/shop -type d -exec chmod 770 {} \;
-sudo find /var/www/shop -type f -exec chmod 660 {} \;
-# sudo chown www-data:www-data -Rv /var/www/shop
-# sudo chown user:user -R .
 
 # try to set php-fpm to /run.... and the other config to /var/run
 
@@ -117,11 +124,7 @@ sudo find /var/www/shop -type f -exec chmod 660 {} \;
 # it seems running 2 php-fpm's the normal and the annularis . Delete the normal
 
 
-
-#####################################################################################################
-#####################################################################################################
-
-# add robot.txt from bitwasp/W1s
+ add robot.txt from bitwasp/W1s
 
 # add user and group with password install this tool 
 sudo apt-get install gnome-system-tools
