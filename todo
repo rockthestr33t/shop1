@@ -1,4 +1,4 @@
-1.
+# 1.
 Onion Market's url's for inspiration :
 https://saralaajivika.000webhostapp.com/
 https://gist.github.com/smarek/b538465a711edc7e6d7652c82e76d374
@@ -8,6 +8,8 @@ https://shuup.readthedocs.io/en/latest/index.html
 https://github.com/puuble/laravelMarket
 https://github.com/kirilkirkov/Ecommerce-CodeIgniter-Bootstrap
 
+
+ ##################################################### ADD TO sCRIPT  ##########################################################
 # 2.
 # ADD to script disable apache2 on startup :
 sudo update-rc.d apache2 disable
@@ -109,7 +111,7 @@ processes":3,"active processes":0,"total processes":3}
 # curl http://localhost:81/ping.php
 # pong
 
-
+########################################## things todo ##########################################################
 
 # try to set php-fpm to /run.... and the other config to /var/run
 
@@ -124,16 +126,24 @@ processes":3,"active processes":0,"total processes":3}
 # it seems running 2 php-fpm's the normal and the annularis . Delete the normal
 
 
- add robot.txt from bitwasp/W1s
+ # DONE! # add robot.txt from bitwasp/W1s and give it the right permission and user / group 
+ sudo nautilus /var/www/shop/robots.txt
 
-# add user and group with password install this tool 
+# DONE # ! add user and group with password install this tool 
 sudo apt-get install gnome-system-tools
 # this url for add user and group: https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart
 # this url for changing permission: https://askubuntu.com/questions/66718/how-to-manage-users-and-groups-using-gui
 # after that change to new user
 
-# 
-sudo nano /etc/php/7.0/fpm/php.ini  # change phpcgi_fixpathinfo = 0 and memory_limit to 256M
+
+
+
+#################################################### changed things  ##############################################################
+# thhis things i changed
+
+# change phpcgi_fixpathinfo = 0 and memory_limit to 256M
+sudo nano /etc/php/7.0/fpm/php.ini  
+
 
 
 
