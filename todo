@@ -144,15 +144,19 @@ sudo apt-get install gnome-system-tools
 # change phpcgi_fixpathinfo = 0 and memory_limit to 256M
 sudo nano /etc/php/7.0/fpm/php.ini  
 
+# base url
+# change ($config['base_url']	= ''; to $config['base_url']	= 'http://127.0.0.1';)
+sudo nano /var/www/shop/application/config/config.php
 
 
 
 
+# install to onion hidden service
 
 
 
-
-
+# read codeigniter +
+https://codeigniter.com
 
 
 
