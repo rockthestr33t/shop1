@@ -155,17 +155,52 @@ cd /var/www/shop
 sudo cp annularis-nginx.conf /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/annularis-nginx.conf /etc/nginx/sites-enabled/
 service nginx restart
-
-
-
-
 echo " scroll up and check every settings where you see '##' "
 
+# Install repo's for ToR 
+# deb http://deb.torproject.org/torproject.org xenial main
+# deb-src http://deb.torproject.org/torproject.org xenial main
+sudo nano /etc/apt/sources.list
+
+# now add GpG Key's
+gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+
+# update again
+sudo apt-get update
+
+# Install Tor with Keyring
+sudo apt-get install tor deb.torproject.org-keyring
+
+# save tor settings
+sudo cp /etc/tor/torrc /etc/tor/OLD.torrc
+
+# setup the tor config
+sudo nano /etc/tor/torrc
+
+# uncomment these two lines
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
 
 
+# Restart Tor
+sudo service tor restart
 
+# showing hostname
+sudo cat /var/lib/tor/hidden_service/hostname
 
+# resstart nginx
+sudo service nginx restart
 
+# changing nginx root and servername
+server {
+	listen 127.0.0.1:80;
+	root /var/www/shop/;
+	index index.html;
+	server_name testp7e2ctestppizgn.onion;
+  
+# restart
+sudo service resart nginx && sudo service restart php7.0-fpm && sudo service restart tor
 
 
 
