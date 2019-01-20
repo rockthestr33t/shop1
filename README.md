@@ -10,7 +10,7 @@ sudo apt-get install apache2
 git clone https://github.com/rockthestreet81/shop.git
 cd /var/www/shop
 
-## chmod shop.sh
+## chmod install.sh
 sudo chmod +x install.sh
 
 ## Install Annularis with Apache for Development
