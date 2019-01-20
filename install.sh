@@ -99,29 +99,28 @@ echo "##########################################################################
 echo "== Setting up Apache2 DocumentRoot.. =="
 echo " check if still root.. "
 sudo su
-sleep 2
 sudo grep -q "shop" /etc/apache2/sites-enabled/000-default.conf; then
 sudo sed -i 's#/var/www/html#/var/www/shop#' /etc/apache2/sites-enabled/000-default.conf
 echo "###########################################################################################################################"
+sleep 2
 
 
 
 echo "###########################################################################################################################"
 echo "== Setup mysql database =="
-sleep 3
 # mysql database
 sudo mysql
 sudo mysql -e "CREATE DATABASE annularis;"
 sudo mysql -e "CREATE USER annularis IDENTIFIED BY 'password';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON annularis.* TO annularis@localhost IDENTIFIED BY 'password';"
 echo "###########################################################################################################################"
+sleep 3
 
 
 echo "###########################################################################################################################"
 echo "##################### CHECK AFTER INSTALL #################################################################################"
 echo "###########################################################################################################################"
 echo "== Setup Database and Bitcoin.conf after Install this script..  =="
-sleep 3
 echo "# setup's for Annularis config's.. "
 echo " sudo nano /var/www/shop/install/config/database.php  "
 echo " sudo nano /var/www/shop/install/config/bitcoin.php  "
@@ -134,7 +133,7 @@ echo "Bitcoinuser = "bitcoinuser" "
 echo "Bitcoin Password = "bitcoinpass" "
 echo "Bitcoin IP = "127.0.0.1" "
 echo "###########################################################################################################################"
-sleep 8
+sleep 3
 
 
 echo "###########################################################################################################################"
@@ -144,10 +143,11 @@ echo " copy htaccess.sample to .htaccess setup show setup instruction's "
 echo "# comment out 'RewriteBase /shop' "
 echo " if you want to use Apache as hidden service server add onion url to .htaccess";
 echo "## sudo nano .htaccess "
-sleep 3
+
 cd /var/www/shop
 sudo cp htaccess.sample .htaccess
 echo "###########################################################################################################################"
+sleep 3
 
 
 echo "###########################################################################################################################"
@@ -160,7 +160,14 @@ echo "##########################################################################
 
 
 
+
+
+
+
+
+
 echo "###########################################################################################################################"
+echo "################################ STEP 2 NGINX HIDDEN_SERVICE ##############################################################"
 echo "###########################################################################################################################"
 echo " setting up nginx.. "
 sudo service apache2 stop
