@@ -1,52 +1,79 @@
 #!/bin/bash
-echo "== Are you Root??? =="
-sudo su
+
+echo "###########################################################################################################################"
+echo "############################### STEP ONE DEVELOPMENT WITH APACHE2 #########################################################"
+echo "###########################################################################################################################"
 sleep 3
 
+
+echo "###########################################################################################################################"
+echo "== Are you Root??? =="
+sudo su
+echo "###########################################################################################################################"
+sleep 3
+
+
+echo "###########################################################################################################################"
 echo "== Update the Mashine !!!!! ==" 
-sleep 5
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y 
+echo "###########################################################################################################################"
+sleep 3
 
 
+echo "###########################################################################################################################"
 echo "== Setting up repo and in a few seconds you have to hit ENTER ==" 
-sleep 5 
 sudo apt-get install python-software-properties
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update 
+echo "###########################################################################################################################"
+sleep 3
 
 
+echo "###########################################################################################################################"
 echo "== Install Dependency's !!! ==" 
 sleep 5sudo 
 sudo apt-get install -y apache2 mysql-server mysql-client libapache2-mod-php7.0 php7.0 php7.0-mcrypt php7.0-mbstring php7.0-gnupg php7.0-mysql php7.0-gmp php7.0-curl php7.0-bcmath php7.0-gd php7.0-fpm git curl git mcrypt curl unzip atool subversion 
+echo "###########################################################################################################################"
 
 
+echo "###########################################################################################################################"
 echo "== Change Directory.. ==" 
-sleep 3 
 cd /var/www/
 # sudo git clone https://github.com/annularis/shop
 sudo chown www-data:www-data -Rv shop
 cd shop/install
+echo "###########################################################################################################################"
+sleep 3 
 
+
+echo "###########################################################################################################################"
 echo "== Enable a2enmod and restart apache / nginx..  =="
-sleep 3
 sudo a2enmod rewrite
 sudo service apache2 restart
-
-echo "== Install Bitcoin maybe you have to change version.. =="
+echo "###########################################################################################################################"
 sleep 3
+
+
+echo "###########################################################################################################################"
+echo "== Install Bitcoin maybe you have to change version.. =="
 cd /tmp
 sudo wget https://bitcoin.org/bin/bitcoin-core-0.17.1/bitcoin-0.17.1-x86_64-linux-gnu.tar.gz
 sudo aunpack bitcoin-0.17.1-x86_64-linux-gnu.tar.gz
 cd bitcoin-0.17.1
 sudo cp bin/* /usr/local/bin/
-
-
-echo "== Start bitcoin... =="
+echo "###########################################################################################################################"
 sleep 3
-sudo bitcoind -daemon -testnet -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
 
 
 echo "###########################################################################################################################"
+echo "== Start bitcoin... =="
+sudo bitcoind -daemon -testnet -rpcport="7530" -rpcuser="bitcoinuser" -rpcpassword="bitcoinpass"
+echo "###########################################################################################################################"
+sleep 3
+
+
+echo "###########################################################################################################################"
+echo "##################### CHECK AFTER INSTALL #################################################################################"
 echo "###########################################################################################################################"
 echo "== Setup Apache2...  =="
 echo "=== Check after install if settings are correct.. ==="
@@ -54,16 +81,20 @@ echo "# change AllowOverride All for /var/www "
 echo "## sudo nano /etc/apache2/apache2.conf "
 echo "# change DocumentRoot to /var/www/shop "
 echo "## sudo nano /etc/apache2/sites-enabled/000-default.conf "
-sleep 8
-
 echo "###########################################################################################################################"
+sleep 3
+
+
+
 echo "###########################################################################################################################"
 echo "Setting up 'AllowOverride All' for /var/www"
-sleep 2
 sudo sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
 sudo service apache2 restart
-
 echo "###########################################################################################################################"
+sleep 2
+
+
+
 echo "###########################################################################################################################"
 echo "== Setting up Apache2 DocumentRoot.. =="
 echo " check if still root.. "
@@ -71,8 +102,11 @@ sudo su
 sleep 2
 sudo grep -q "shop" /etc/apache2/sites-enabled/000-default.conf; then
 sudo sed -i 's#/var/www/html#/var/www/shop#' /etc/apache2/sites-enabled/000-default.conf
+echo "###########################################################################################################################"
 
 
+
+echo "###########################################################################################################################"
 echo "== Setup mysql database =="
 sleep 3
 # mysql database
@@ -80,8 +114,11 @@ sudo mysql
 sudo mysql -e "CREATE DATABASE annularis;"
 sudo mysql -e "CREATE USER annularis IDENTIFIED BY 'password';"
 sudo mysql -e "GRANT ALL PRIVILEGES ON annularis.* TO annularis@localhost IDENTIFIED BY 'password';"
+echo "###########################################################################################################################"
+
 
 echo "###########################################################################################################################"
+echo "##################### CHECK AFTER INSTALL #################################################################################"
 echo "###########################################################################################################################"
 echo "== Setup Database and Bitcoin.conf after Install this script..  =="
 sleep 3
@@ -96,24 +133,35 @@ echo "Database Password = "password" "
 echo "Bitcoinuser = "bitcoinuser" "
 echo "Bitcoin Password = "bitcoinpass" "
 echo "Bitcoin IP = "127.0.0.1" "
+echo "###########################################################################################################################"
 sleep 8
-echo "###########################################################################################################################"
-echo "###########################################################################################################################"
+
 
 echo "###########################################################################################################################"
+echo "##################### CHECK AFTER INSTALL #################################################################################"
 echo "###########################################################################################################################"
 echo " copy htaccess.sample to .htaccess setup show setup instruction's "
 echo "# comment out 'RewriteBase /shop' "
+echo " if you want to use Apache as hidden service server add onion url to .htaccess";
 echo "## sudo nano .htaccess "
 sleep 3
 cd /var/www/shop
 sudo cp htaccess.sample .htaccess
+echo "###########################################################################################################################"
 
+
+echo "###########################################################################################################################"
 echo " Change Permissions of "config Files" "
 sudo touch /var/www/shop/application/config/database.php && sudo chmod 777 /var/www/shop/application/config/database.php
 sudo touch /var/www/shop/application/config/bitcoin.php && sudo chmod 777 /var/www/shop/application/config/bitcoin.php
 sudo touch /var/www/shop/application/config/config.php && sudo chmod 777 /var/www/shop/application/config/config.php
+echo "###########################################################################################################################"
 
+
+
+
+echo "###########################################################################################################################"
+echo "###########################################################################################################################"
 echo " setting up nginx.. "
 sudo service apache2 stop
 sudo apt-get install nginx
