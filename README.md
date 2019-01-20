@@ -20,6 +20,7 @@ sudo ./install.sh
 
 ## after you do your configurations it's time to changing Server
 sudo chmod +x install-nginx.sh
+
 sudo ./install-nginx.sh
 
 ## and follow instructions
