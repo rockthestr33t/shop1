@@ -70,7 +70,10 @@ sudo apt-get install gnome-system-tools
 sudo nano /etc/php/7.0/fpm/php.ini  
 
 # base url
-# change ($config['base_url']	= ''; to $config['base_url']	= 'http://127.0.0.1';)
+# change ($config['base_url']	= ''; 
+# to $config['base_url']	= 'http://127.0.0.1';)
+# to $config['base_url']	= 'http://obik5m7ofmhkkd49kgs45inft4ixhkfbs5tonftui74ugo8f4jomzenuyd.onion/';    
+
 sudo nano /var/www/shop/application/config/config.php
 
 
